@@ -17,6 +17,8 @@ namespace CVRMelonAssistant.Pages
     /// </summary>
     public partial class Options : Page
     {
+        private bool _displayBrokenMods;
+
         public static Options Instance = new Options();
 
         public string InstallDirectory { get; set; }
@@ -24,11 +26,30 @@ namespace CVRMelonAssistant.Pages
         public bool CloseWindowOnFinish { get; set; }
         public string LogURL { get; private set; }
 
+        public bool DisplayBrokenMods
+        {
+            get => _displayBrokenMods;
+            set
+            {
+                if (_displayBrokenMods == value) return;
+                _displayBrokenMods = value;
+            }
+        }
+
         public Options()
         {
             InitializeComponent();
+            _displayBrokenMods = Properties.Settings.Default.DisplayBrokenMods;
             this.DataContext = this;
         }
+
+        private void ToggleBrokenMods_Changed(object sender, RoutedEventArgs e)
+        {
+            var cb = (CheckBox)sender;
+            Properties.Settings.Default.DisplayBrokenMods = cb.IsChecked == true;
+            Properties.Settings.Default.Save();
+        }
+
 
         private void SelectDirButton_Click(object sender, RoutedEventArgs e)
         {

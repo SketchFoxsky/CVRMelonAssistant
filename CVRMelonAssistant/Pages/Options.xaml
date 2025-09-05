@@ -168,6 +168,24 @@
             Content="{DynamicResource Options:OpenFolderButton}" />
 
         <TextBlock
+            Grid.Row="15"
+            Grid.ColumnSpan="4"
+            HorizontalAlignment="Left"
+            FontSize="16"
+            FontWeight="Bold"
+            Text="{DynamicResource Options:DisplayBrokenMods}"/>
+
+        <CheckBox
+            Grid.Row="15"
+            Grid.Column="1"
+            Margin="5"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"
+            Checked="ToggleBrokenMods_Changed"
+            Unchecked="ToggleBrokenMods_Changed"
+            IsChecked="{Binding DisplayBrokenMods, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <TextBlock
             Grid.Row="16"
             Margin="15,5,5,5"
             HorizontalAlignment="Left"
@@ -211,6 +229,5 @@
                 <TextBlock Foreground="White" Text="{DynamicResource Options:InstallMLButton}" />
             </Button>
         </StackPanel>
-
     </Grid>
 </Page>

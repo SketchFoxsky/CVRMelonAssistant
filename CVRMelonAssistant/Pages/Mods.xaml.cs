@@ -260,6 +260,8 @@ namespace CVRMelonAssistant.Pages
 
         public async Task PopulateModsList()
         {
+            bool showBroken = Options.Instance.DisplayBrokenMods;
+
             // 1) Active mods — always visible
             foreach (Mod mod in AllModsList.Where(x => !x.versions[0].IsBroken && !x.versions[0].IsRetired))
                 AddModToList(mod);
@@ -268,14 +270,23 @@ namespace CVRMelonAssistant.Pages
             foreach (var mod in UnknownMods)
                 AddModToList(mod, UnknownCategory);
 
-            // 3) Broken/Retired — only visible if installed on the user's system to prevent users installing broken/retired mods!
-            foreach (Mod mod in AllModsList.Where(x =>
-                         (x.versions[0].IsBroken || x.versions[0].IsRetired) &&
-                         x.installedFilePath != null))
+            // 3) Broken/Retired
+            var brokenOrRetired = AllModsList.Where(x => x.versions[0].IsBroken || x.versions[0].IsRetired);
+
+            if (showBroken)
             {
-                AddModToList(mod);
+                // Show all broken/retired (user opted in)
+                foreach (var mod in brokenOrRetired)
+                    AddModToList(mod);
+            }
+            else
+            {
+                // Keep existing safety: only show if installed locally
+                foreach (var mod in brokenOrRetired.Where(x => x.installedFilePath != null))
+                    AddModToList(mod);
             }
         }
+
 
 
         private void AddModToList(Mod mod, ModListItem.CategoryInfo categoryOverride = null)
