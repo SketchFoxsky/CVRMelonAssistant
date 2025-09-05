@@ -260,18 +260,23 @@ namespace CVRMelonAssistant.Pages
 
         public async Task PopulateModsList()
         {
+            // 1) Active mods — always visible
             foreach (Mod mod in AllModsList.Where(x => !x.versions[0].IsBroken && !x.versions[0].IsRetired))
                 AddModToList(mod);
 
+            // 2) Unknown mods on disk — always visible (important for user safety)
             foreach (var mod in UnknownMods)
                 AddModToList(mod, UnknownCategory);
 
-            foreach (Mod mod in AllModsList.Where(x => x.versions[0].IsBroken))
+            // 3) Broken/Retired — only visible if installed on the user's system to prevent users installing broken/retired mods!
+            foreach (Mod mod in AllModsList.Where(x =>
+                         (x.versions[0].IsBroken || x.versions[0].IsRetired) &&
+                         x.installedFilePath != null))
+            {
                 AddModToList(mod);
-
-            foreach (Mod mod in AllModsList.Where(x => x.versions[0].IsRetired))
-                AddModToList(mod);
+            }
         }
+
 
         private void AddModToList(Mod mod, ModListItem.CategoryInfo categoryOverride = null)
         {
