@@ -2,8 +2,8 @@
 
 ChilloutVR Melon Assistant is a PC mod installer for ChilloutVR. It uses mods published in [ChilloutVR Modding Group Discord](https://discord.gg/dndGPM3bxu).  
 It's a (very stripped down) fork of [Assistant's Mod Assistant](https://github.com/Assistant/ModAssistant), a mod manager for Beat Saber.  
-Modding ChilloutVR is allowed by the developers. You can read relevant [TOS portion here](https://docs.abinteractive.net/official/legal/tos/#7-modding-our-games).
-ChilloutVR Melon Assistant is not affiliated with and/or endorsed by Alpha Blend Interactive.
+Modding ChilloutVR is allowed by the developers. You can read relevant [TOS portion here](https://docs.chilloutvr.net/official/legal/tos/#7-modding-our-games).
+ChilloutVR Melon Assistant is not affiliated with and/or endorsed by the ChilloutVR Team.
 
 * [Features](#Features)
 * [Usage](#Usage)

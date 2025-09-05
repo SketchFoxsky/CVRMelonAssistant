@@ -38,11 +38,11 @@
         ChilloutVR allows modding the game under certain conditions, specifically as long as mods are not used for evil.
     </Span>
     <Span x:Key="Intro:Terms:Term0">
-        ChilloutVR Modding Assistant and mods provided here are not associated with or endorsed by Alpha Blend Interactive (the devloper).
+        ChilloutVR Modding Assistant and mods provided here are not associated with or endorsed by the ChilloutVR Team.
     </Span>
     <Span x:Key="Intro:Terms:Term1">
         Mods
-        <Bold>can break</Bold> every update. This is normal, and
+        <Bold>can and will break</Bold> every Nightly and Stable update. This is normal, and
         <Bold>not</Bold> ChilloutVR's fault.
     </Span>
     <Span x:Key="Intro:Terms:Term2">
@@ -61,7 +61,7 @@
         <LineBreak/> They are not trying to kill mods.
     </Span>
     <Span x:Key="Intro:ReportIssuesNoMods">
-        If you want to report an issue with the game to ChilloutVR Team, <Bold>make sure the issue is not caused by mods.</Bold>
+        If you want to report an issue with the game to the ChilloutVR Team, <Bold>make sure the issue is not caused by mods.</Bold>
         <LineBreak />To do so, remove all mods and/or MelonLoader and check if the issue still happens.
     </Span>
     <Span x:Key="Intro:ReviewsRustySpoon">
