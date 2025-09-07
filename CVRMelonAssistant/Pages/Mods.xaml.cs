@@ -343,23 +343,38 @@ namespace CVRMelonAssistant.Pages
             if (!InstallHandlers.IsMelonLoaderInstalled())
                 await InstallHandlers.InstallMelonLoader();
 
-            foreach (Mod mod in AllModsList)
+            // Only iterate the items shown in the list (they always have a ListItem)
+            foreach (var item in ModList)
             {
-                // Ignore mods that are newer than installed version or up-to-date
-                if (mod.ListItem.GetVersionComparison >= 0 && mod.installedInBrokenDir == mod.versions[0].IsBroken && mod.installedInRetiredDir == mod.versions[0].IsRetired) continue;
+                if (!item.IsSelected)
+                    continue;
 
-                if (mod.ListItem.IsSelected)
+                var mod = item.ModInfo;
+
+                // Ignore mods that are newer than installed version or up-to-date
+                if (item.GetVersionComparison >= 0 &&
+                    mod.installedInBrokenDir == mod.versions[0].IsBroken &&
+                    mod.installedInRetiredDir == mod.versions[0].IsRetired)
                 {
-                    MainWindow.Instance.MainText = $"{string.Format((string)FindResource("Mods:InstallingMod"), mod.versions[0].name)}...";
-                    await InstallHandlers.InstallMod(mod);
-                    MainWindow.Instance.MainText = $"{string.Format((string)FindResource("Mods:InstalledMod"), mod.versions[0].name)}.";
+                    continue;
                 }
+
+                MainWindow.Instance.MainText =
+                    string.Format((string)FindResource("Mods:InstallingMod"), mod.versions[0].name) + "...";
+
+                await InstallHandlers.InstallMod(mod);
+
+                MainWindow.Instance.MainText =
+                    string.Format((string)FindResource("Mods:InstalledMod"), mod.versions[0].name) + ".";
             }
 
-            MainWindow.Instance.MainText = $"{FindResource("Mods:FinishedInstallingMods")}.";
+            MainWindow.Instance.MainText = (string)FindResource("Mods:FinishedInstallingMods") + ".";
             MainWindow.Instance.InstallButton.IsEnabled = true;
+
             RefreshModsList();
+            view?.Refresh();
         }
+
 
         private void ModCheckBox_Checked(object sender, RoutedEventArgs e)
         {
